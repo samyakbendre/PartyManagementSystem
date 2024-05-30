@@ -1,0 +1,13 @@
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    width: 70%;
+}
+
+.error-mat{
+    color: rgb(225, 24, 24);
+}

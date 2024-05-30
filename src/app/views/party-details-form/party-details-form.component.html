@@ -1,0 +1,161 @@
+<!-- my-form.component.html -->
+<div class="container">
+  <div class="form m-3">
+    <form [formGroup]="partyDetails" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" formControlName="name">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('name')?.hasError('required')  && partyDetails.get('name')?.touched"> Name is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="company_name">Company Name:</label>
+        <input type="text" class="form-control" id="company_name" formControlName="company_name">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('company_name')?.hasError('required')  && partyDetails.get('company_name')?.touched"> Company Name is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="mobile_no">Mobile No:</label>
+        <input type="text" class="form-control" id="mobile_no" formControlName="mobile_no">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('mobile_no')?.hasError('required')  && partyDetails.get('mobile_no')?.touched"> Mobile No is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="telephone_no">Telephone No:</label>
+        <input type="text" class="form-control" id="telephone_no" formControlName="telephone_no">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('telephone_no')?.hasError('required')  && partyDetails.get('telephone_no')?.touched"> Telephone No is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="whatsapp_no">WhatsApp No:</label>
+        <input type="text" class="form-control" id="whatsapp_no" formControlName="whatsapp_no">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('whatsapp_no')?.hasError('required')  && partyDetails.get('whatsapp_no')?.touched"> Whatsapp no is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" formControlName="email">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('email')?.hasError('required')  && partyDetails.get('email')?.touched"> Email is required</mat-error>
+        <mat-error class="error-mat" *ngIf="partyDetails.get('email')?.hasError('email')  && partyDetails.get('email')?.touched"> Email is not Valid</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="remark">Remark:</label>
+        <textarea class="form-control" id="remark" formControlName="remark"></textarea>
+        <mat-error class="error-mat" *ngIf="partyDetails.get('remark')?.hasError('required')  && partyDetails.get('remark')?.touched"> Remark is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="login_access">Login Access:</label>
+        <input type="checkbox" id="login_access" formControlName="login_access">
+      </div>
+    
+      <div class="form-group">
+        <label for="date_of_birth">Date of Birth:</label>
+        <input type="date" class="form-control" id="date_of_birth" formControlName="date_of_birth">
+      </div>
+    
+      <div class="form-group">
+        <label for="anniversary_date">Anniversary Date:</label>
+        <input type="date" class="form-control" id="anniversary_date" formControlName="anniversary_date">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('date')?.hasError('required')  && partyDetails.get('date')?.touched"> Date is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="gstin">GSTIN:</label>
+        <input type="text" class="form-control" id="gstin" formControlName="gstin">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('gstin')?.hasError('required')  && partyDetails.get('gstin')?.touched"> GST is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="pan_no">PAN No:</label>
+        <input type="text" class="form-control" id="pan_no" formControlName="pan_no">
+        <mat-error class="error-mat" *ngIf="partyDetails.get('pan_no')?.hasError('required')  && partyDetails.get('pan_no')?.touched"> PAN no is required</mat-error>
+      </div>
+    
+      <div class="form-group">
+        <label for="apply_tds">Apply TDS:</label>
+        <input type="checkbox" id="apply_tds" formControlName="apply_tds">
+      </div>
+    
+      <div class="form-group">
+        <label for="credit_limit">Credit Limit:</label>
+        <input type="number" class="form-control" id="credit_limit" formControlName="credit_limit">
+      </div>
+    
+      <div formGroupName="address">
+        <div class="form-group">
+          <label for="addressLine1">Address Line 1:</label>
+          <input type="text" class="form-control" id="addressLine1" formControlName="addressLine1">
+          <mat-error class="error-mat" *ngIf="partyDetails.get('addressLine1')?.hasError('required')  && partyDetails.get('addressLine1')?.touched"> Addressline is required</mat-error>
+        </div>
+    
+        <div class="form-group">
+          <label for="addressLine2">Address Line 2:</label>
+          <input type="text" class="form-control" id="addressLine2" formControlName="addressLine2">
+        </div>
+    
+        <div class="form-group">
+          <label for="country">Country:</label>
+          <input type="text" class="form-control" id="country" formControlName="country">
+        </div>
+    
+        <div class="form-group">
+          <label for="state">State:</label>
+          <input type="text" class="form-control" id="state" formControlName="state">
+        </div>
+    
+        <div class="form-group">
+          <label for="city">City:</label>
+          <input type="text" class="form-control" id="city" formControlName="city">
+        </div>
+    
+        <div class="form-group">
+          <label for="pincode">Pincode:</label>
+          <input type="text" class="form-control" id="pincode" formControlName="pincode">
+        </div>
+      </div>
+
+      <div formGroupName="bank">
+        <div class="form-group">
+          <label for="bank_ifsc_code">Bank IFSC</label>
+          <input type="text" class="form-control" id="bank_ifsc_code" formControlName="bank_ifsc_code">
+          <mat-error class="error-mat" *ngIf="partyDetails.get('bank_ifsc_code')?.hasError('required')  && partyDetails.get('bank_ifsc_code')?.touched"> IFSC code is required</mat-error>
+        </div>
+    
+        <div class="form-group">
+          <label for="bank_name">Bank Name</label>
+          <input type="text" class="form-control" id="bank_name" formControlName="bank_name">
+        </div>
+    
+        <div class="form-group">
+          <label for="branch_name">Branch Name</label>
+          <input type="text" class="form-control" id="branch_name" formControlName="branch_name">
+        </div>
+    
+        <div class="form-group">
+          <label for="account_no">Account Name</label>
+          <input type="text" class="form-control" id="account_no" formControlName="account_no">
+        </div>
+    
+        <div class="form-group">
+          <label for="account_holder_name">Account Holder Name</label>
+          <input type="text" class="form-control" id="account_holder_name" formControlName="account_holder_name">
+        </div>
+      </div>
+    
+      <!-- <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="file" class="form-control-file" id="image" formControlName="image">
+      </div> -->
+
+      <div class="form-group">
+        <label for="image">Image:</label>
+        <input type="file" class="form-control-file" id="image" (change)="onFileChange($event)">
+      </div>
+    
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+  
+</div>
