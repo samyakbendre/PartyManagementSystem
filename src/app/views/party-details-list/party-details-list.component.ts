@@ -31,6 +31,7 @@ export class PartyDetailsListComponent implements OnInit{
     this.apiService.deleteParty(id).subscribe((response:any)=>{
       if(response.success){
         alert('Vendor Deleted Successfully!')
+        this.getPartyDetails()
       }
     },(error)=>{
       alert('Encountered Error!')
