@@ -106,15 +106,11 @@ export class PartyDetailsFormComponent implements OnInit{
   }
 
   onSubmit() {
-    debugger
     this.markFormGroupTouched(this.partyDetails);
     if (this.partyDetails.invalid) {
-      debugger
       console.log(this.partyDetails.invalid)
       return;
     }
-
-    debugger
     const formData = new FormData();
     formData.append('name', this.partyDetails.get('name')?.value);
     formData.append('company_name', this.partyDetails.get('company_name')?.value);
