@@ -13,6 +13,9 @@
           <mat-error class="error-mat" *ngIf="loginForm.get('password')?.hasError('required')  && loginForm.get('password')?.touched"> Password is required</mat-error>
         </div>
         <button type="submit" (click)="onLogin()">Login</button>
+        <div class="m-2">
+          <mat-error class="error-mat" *ngIf="errorMsg != ''">{{errorMsg}}</mat-error>
+        </div>
       </form>
     </div>
 </div>

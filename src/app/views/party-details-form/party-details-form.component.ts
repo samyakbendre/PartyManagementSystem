@@ -147,11 +147,6 @@ export class PartyDetailsFormComponent implements OnInit{
       formData.append('image', imageControl.value);
     }
   
-    console.log('FormData content:',formData);
-    formData.forEach((value, key) => {
-      console.log(`${key}: ${value}`);
-    });
-  
     this.apiService.createPartyDetails(formData).subscribe((response: any) => {
       if (response.success) {
         alert('Party Created Successfully!');

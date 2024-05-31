@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit{
   }
 
   hide : boolean = false;
+  errorMsg : string = ''
 
   ngOnInit(){
 
@@ -43,7 +44,9 @@ export class LoginComponent implements OnInit{
         this.tokenService.saveToken(response.token)
       }
     },(error)=>{
-      alert('Login Unsuccessful')
+      if(error.error.User == false){
+        this.errorMsg = 'Invalid Username!'
+      }
     })
   }
 
