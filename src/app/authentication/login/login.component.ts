@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit{
   errorMsg : string = ''
 
   ngOnInit(){
-
+    let token = this.tokenService.getToken()
+    if(token){
+      this.router.navigate(['/party-details-list'])
+    }
   }
 
   onLogin(){
