@@ -43,7 +43,7 @@ export class PartyDetailsFormComponent implements OnInit{
         account_no: [''],
         account_holder_name: ['']
       }),
-      image: [null]
+      image: ['']
     });
   }
 
@@ -149,6 +149,7 @@ export class PartyDetailsFormComponent implements OnInit{
   
     this.apiService.createPartyDetails(formData).subscribe((response: any) => {
       if (response.success) {
+        this.errorMsg = ''
         alert('Party Created Successfully!');
       }
     }, (error) => {
