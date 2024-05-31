@@ -52,3 +52,7 @@
 .table-container{
     width: 100%;
 }
+
+.text-button{
+    font-weight: bold;
+}
