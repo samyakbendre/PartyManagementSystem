@@ -1,7 +1,7 @@
 <!-- my-form.component.html -->
 <div class="container">
   <div class="form m-3">
-    <form [formGroup]="partyDetails" (ngSubmit)="onSubmit()">
+    <form [formGroup]="partyDetails" enctype="multipart/form-data" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" formControlName="name">
@@ -58,7 +58,7 @@
       <div class="form-group">
         <label for="anniversary_date">Anniversary Date:</label>
         <input type="date" class="form-control" id="anniversary_date" formControlName="anniversary_date">
-        <mat-error class="error-mat" *ngIf="partyDetails.get('date')?.hasError('required')  && partyDetails.get('date')?.touched"> Date is required</mat-error>
+        <mat-error class="error-mat" *ngIf="partyDetails.get('anniversary_date')?.hasError('required')  && partyDetails.get('anniversary_date')?.touched">Date is required</mat-error>
       </div>
     
       <div class="form-group">
@@ -87,7 +87,7 @@
         <div class="form-group">
           <label for="addressLine1">Address Line 1:</label>
           <input type="text" class="form-control" id="addressLine1" formControlName="addressLine1">
-          <mat-error class="error-mat" *ngIf="partyDetails.get('addressLine1')?.hasError('required')  && partyDetails.get('addressLine1')?.touched"> Addressline is required</mat-error>
+          <mat-error class="error-mat" *ngIf="partyDetails.get('address')?.get('addressLine1')?.hasError('required')  && partyDetails.get('address')?.get('addressLine1')?.touched"> Addressline is required</mat-error>
         </div>
     
         <div class="form-group">
@@ -120,7 +120,7 @@
         <div class="form-group">
           <label for="bank_ifsc_code">Bank IFSC</label>
           <input type="text" class="form-control" id="bank_ifsc_code" formControlName="bank_ifsc_code">
-          <mat-error class="error-mat" *ngIf="partyDetails.get('bank_ifsc_code')?.hasError('required')  && partyDetails.get('bank_ifsc_code')?.touched"> IFSC code is required</mat-error>
+          <mat-error class="error-mat" *ngIf="partyDetails.get('bank')?.get('bank_ifsc_code')?.hasError('required')  && partyDetails.get('bank')?.get('bank_ifsc_code')?.touched"> IFSC code is required</mat-error>
         </div>
     
         <div class="form-group">
@@ -153,8 +153,13 @@
         <label for="image">Image:</label>
         <input type="file" class="form-control-file" id="image" (change)="onFileChange($event)">
       </div>
-    
-      <button type="submit" class="btn btn-primary">Submit</button>
+      
+      <div class="footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <div class="m-2">
+          <mat-error class="error-mat" *ngIf="errorMsg != ''">{{errorMsg}}</mat-error>
+        </div>
+      </div>
     </form>
   </div>
   

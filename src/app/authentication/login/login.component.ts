@@ -28,6 +28,10 @@ export class LoginComponent implements OnInit{
   }
 
   onLogin(){
+    this.markFormGroupTouched(this.loginForm)
+    if(this.loginForm.invalid){
+      return 
+    }
     let loginObj = {
       username : this.loginForm.get('username')?.value,
       password : this.loginForm.get('password')?.value
@@ -41,5 +45,15 @@ export class LoginComponent implements OnInit{
     },(error)=>{
       alert('Login Unsuccessful')
     })
+  }
+
+  markFormGroupTouched(formGroup: FormGroup) {
+    Object.values(formGroup.controls).forEach(control => {
+      if (control instanceof FormGroup) {
+        this.markFormGroupTouched(control);
+      } else {
+        control.markAsTouched();
+      }
+    });
   }
 }

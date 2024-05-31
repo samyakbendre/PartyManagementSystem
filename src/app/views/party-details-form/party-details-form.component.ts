@@ -43,17 +43,18 @@ export class PartyDetailsFormComponent implements OnInit{
         account_no: [''],
         account_holder_name: ['']
       }),
-      image: ['']
+      image: [null]
     });
   }
 
   id:number = 0;
+  errorMsg : string = '';
 
   ngOnInit(): void {
     this.route.params.subscribe((response:any)=>{
       this.id = +response['id'];
     })
-    if(this.id != 0){
+    if(this.id !== 0 && !isNaN(this.id)){
       this.apiService.getPartyById(this.id).subscribe((response:any)=>{
         if(response){
           this.partyDetails.get('name')?.patchValue(response.name)
@@ -65,22 +66,23 @@ export class PartyDetailsFormComponent implements OnInit{
           this.partyDetails.get('remark')?.patchValue(response.remark)
           this.partyDetails.get('login_access')?.patchValue(response.login_access)
           this.partyDetails.get('date_of_birth')?.patchValue(response.date_of_birth)
-          this.partyDetails.get('annivarsary_date')?.patchValue(response.annivarsary_date)
+          this.partyDetails.get('anniversary_date')?.patchValue(response.anniversary_date)
           this.partyDetails.get('gstin')?.patchValue(response.gstin)
           this.partyDetails.get('pan_no')?.patchValue(response.pan_no)
           this.partyDetails.get('apply_tds')?.patchValue(response.apply_tds)
           this.partyDetails.get('credit_limit')?.patchValue(response.credit_limit)
-          this.partyDetails.get('address')?.get('addressLine1')?.patchValue(response.address[0].address_line_1)
-          this.partyDetails.get('address')?.get('addressLine2')?.patchValue(response.address[0].address_line_2)
-          this.partyDetails.get('address')?.get('country')?.patchValue(response.address[0].country)
-          this.partyDetails.get('address')?.get('state')?.patchValue(response.address[0].state)
-          this.partyDetails.get('address')?.get('city')?.patchValue(response.address[0].city)
-          this.partyDetails.get('address')?.get('pincode')?.patchValue(response.address[0].pincode)
-          this.partyDetails.get('bank')?.get('bank_ifsc_code')?.patchValue(response.bank_id[0].bank_ifsc_code)
-          this.partyDetails.get('bank')?.get('bank_name')?.patchValue(response.bank_id[0].bank_name)
-          this.partyDetails.get('bank')?.get('branch_name')?.patchValue(response.bank_id[0].branch_name)
-          this.partyDetails.get('bank')?.get('account_no')?.patchValue(response.bank_id[0].account_no)
-          this.partyDetails.get('bank')?.get('account_holder_name')?.patchValue(response.bank_id[0].account_holder_name)
+          this.partyDetails.get('address')?.get('addressLine1')?.patchValue(response?.address[0]?.address_line_1)
+          this.partyDetails.get('address')?.get('addressLine2')?.patchValue(response?.address[0]?.address_line_2)
+          this.partyDetails.get('address')?.get('country')?.patchValue(response.address[0]?.country)
+          this.partyDetails.get('address')?.get('state')?.patchValue(response?.address[0]?.state)
+          this.partyDetails.get('address')?.get('city')?.patchValue(response?.address[0]?.city)
+          this.partyDetails.get('address')?.get('pincode')?.patchValue(response?.address[0]?.pincode)
+          this.partyDetails.get('bank')?.get('bank_ifsc_code')?.patchValue(response?.bank_id[0]?.bank_ifsc_code)
+          this.partyDetails.get('bank')?.get('bank_name')?.patchValue(response?.bank_id[0]?.bank_name)
+          this.partyDetails.get('bank')?.get('branch_name')?.patchValue(response?.bank_id[0]?.branch_name)
+          this.partyDetails.get('bank')?.get('account_no')?.patchValue(response.bank_id[0]?.account_no)
+          this.partyDetails.get('bank')?.get('account_holder_name')?.patchValue(response.bank_id[0]?.account_holder_name)
+          this.partyDetails.get('image')?.patchValue(response.image)
         }
       })
     }
@@ -93,85 +95,6 @@ export class PartyDetailsFormComponent implements OnInit{
     });
   }
 
-  onSubmit(){
-    this.markFormGroupTouched(this.partyDetails);
-    if(this.partyDetails.invalid){
-      return;
-    }
-    // const formData = new FormData();
-    // formData.append('name', this.partyDetails.get('name')?.value)
-    // formData.append('company_name', this.partyDetails.get('company_name')?.value)
-    // formData.append('mobile_no', this.partyDetails.get('mobile_no')?.value)
-    // formData.append('telephone_no', this.partyDetails.get('telephone_no')?.value)
-    // formData.append('whatsapp_no', this.partyDetails.get('whatsapp_no')?.value)
-    // formData.append('email', this.partyDetails.get('email')?.value)
-    // formData.append('remark', this.partyDetails.get('remark')?.value)
-    // formData.append('login_access', this.partyDetails.get('login_access')?.value)
-    // formData.append('date_of_birth', this.partyDetails.get('date_of_birth')?.value)
-    // formData.append('anniversary_date', this.partyDetails.get('anniversary_date')?.value)
-    // formData.append('gstin', this.partyDetails.get('gstin')?.value)
-    // formData.append('pan_no', this.partyDetails.get('pan_no')?.value)
-    // formData.append('apply_tds', this.partyDetails.get('apply_tds')?.value)
-    // formData.append('credit_limit', this.partyDetails.get('credit_limit')?.value)
-    // let addressGroup = this.partyDetails.get('address') as FormGroup;
-    // formData.append('addressLine1', addressGroup.get('addressLine1')?.value);
-    // formData.append('addressLine2', addressGroup.get('addressLine2')?.value);
-    // formData.append('country', addressGroup.get('country')?.value);
-    // formData.append('state', addressGroup.get('state')?.value);
-    // formData.append('city', addressGroup.get('city')?.value);
-    // formData.append('pincode', addressGroup.get('pincode')?.value);
-    // let bankGroup = this.partyDetails.get('bank') as FormGroup;
-    // formData.append('bank_ifsc_code', bankGroup.get('bank_ifsc_code')?.value);
-    // formData.append('bank_name', bankGroup.get('bank_name')?.value);
-    // formData.append('branch_name', bankGroup.get('branch_name')?.value);
-    // formData.append('account_no', bankGroup.get('account_no')?.value);
-    // formData.append('account_holder_name', bankGroup.get('account_holder_name')?.value);
-    // const imageControl = this.partyDetails.get('image');
-    // if (imageControl && imageControl.value) {
-    //   formData.append('image', imageControl.value);
-    // }
-
-    let partyDetailObj : any  = {
-      name : this.partyDetails.get('name')?.value,
-      company_name : this.partyDetails.get('company_name')?.value,
-      mobile_no : this.partyDetails.get('mobile_no')?.value,
-      telephone_no : this.partyDetails.get('telephone_no')?.value,
-      whatsapp_no : this.partyDetails.get('whatsapp_no')?.value,
-      email : this.partyDetails.get('email')?.value,
-      remark : this.partyDetails.get('remark')?.value,
-      login_access : this.partyDetails.get('login_access')?.value,
-      date_of_birth : this.partyDetails.get('date_of_birth')?.value,
-      anniversary_date : this.partyDetails.get('annivarsary_date')?.value,
-      gstin : this.partyDetails.get('gstin')?.value,
-      pan_no : this.partyDetails.get('pan_no')?.value,
-      apply_tds : this.partyDetails.get('apply_tds')?.value,
-      credit_limit : this.partyDetails.get('credit_limit')?.value,
-      address: {
-        address_line_1: this.partyDetails.get('address')?.get('addressLine1')?.value,
-        address_line_2: this.partyDetails.get('address')?.get('addressLine2')?.value,
-        country: this.partyDetails.get('address')?.get('country')?.value,
-        state: this.partyDetails.get('address')?.get('state')?.value,
-        city: this.partyDetails.get('address')?.get('city')?.value,
-        pincode: this.partyDetails.get('address')?.get('pincode')?.value,
-      },
-      bank: {
-        bank_ifsc_code: this.partyDetails.get('bank')?.get('bank_ifsc_code')?.value,
-        bank_name: this.partyDetails.get('bank')?.get('bank_name')?.value,
-        branch_name: this.partyDetails.get('bank')?.get('branch_name')?.value,
-        account_no: this.partyDetails.get('bank')?.get('account_no')?.value,
-        account_holder_name: this.partyDetails.get('bank')?.get('account_holder_name')?.value,
-      },
-      // image : this.partyDetails.get('image')?.value
-    }
-    this.apiService.createPartyDetails(partyDetailObj).subscribe((response:any)=>{
-      if(response.success){
-        alert('Party Created Successfully!')
-      }
-    },(error)=>{
-      alert('error encountered!')
-    })
-  }
-
   markFormGroupTouched(formGroup: FormGroup) {
     Object.values(formGroup.controls).forEach(control => {
       if (control instanceof FormGroup) {
@@ -182,4 +105,69 @@ export class PartyDetailsFormComponent implements OnInit{
     });
   }
 
+  onSubmit() {
+    debugger
+    this.markFormGroupTouched(this.partyDetails);
+    if (this.partyDetails.invalid) {
+      debugger
+      console.log(this.partyDetails.invalid)
+      return;
+    }
+
+    debugger
+    const formData = new FormData();
+    formData.append('name', this.partyDetails.get('name')?.value);
+    formData.append('company_name', this.partyDetails.get('company_name')?.value);
+    formData.append('mobile_no', this.partyDetails.get('mobile_no')?.value);
+    formData.append('telephone_no', this.partyDetails.get('telephone_no')?.value);
+    formData.append('whatsapp_no', this.partyDetails.get('whatsapp_no')?.value);
+    formData.append('email', this.partyDetails.get('email')?.value);
+    formData.append('remark', this.partyDetails.get('remark')?.value);
+    formData.append('login_access', this.partyDetails.get('login_access')?.value ? 'true' : 'false');
+    formData.append('date_of_birth', this.partyDetails.get('date_of_birth')?.value);
+    formData.append('anniversary_date', this.partyDetails.get('anniversary_date')?.value);
+    formData.append('gstin', this.partyDetails.get('gstin')?.value);
+    formData.append('pan_no', this.partyDetails.get('pan_no')?.value);
+    formData.append('apply_tds', this.partyDetails.get('apply_tds')?.value ? 'true' : 'false');
+    formData.append('credit_limit', this.partyDetails.get('credit_limit')?.value.toString());
+  
+    const addressGroup = this.partyDetails.get('address') as FormGroup;
+    formData.append('addressLine1', addressGroup.get('addressLine1')?.value);
+    formData.append('addressLine2', addressGroup.get('addressLine2')?.value);
+    formData.append('country', addressGroup.get('country')?.value);
+    formData.append('state', addressGroup.get('state')?.value);
+    formData.append('city', addressGroup.get('city')?.value);
+    formData.append('pincode', addressGroup.get('pincode')?.value);
+  
+    const bankGroup = this.partyDetails.get('bank') as FormGroup;
+    formData.append('bank_ifsc_code', bankGroup.get('bank_ifsc_code')?.value);
+    formData.append('bank_name', bankGroup.get('bank_name')?.value);
+    formData.append('branch_name', bankGroup.get('branch_name')?.value);
+    formData.append('account_no', bankGroup.get('account_no')?.value);
+    formData.append('account_holder_name', bankGroup.get('account_holder_name')?.value);
+    
+    const imageControl = this.partyDetails.get('image');
+    if (imageControl && imageControl.value) {
+      formData.append('image', imageControl.value);
+    }
+  
+    console.log('FormData content:',formData);
+    formData.forEach((value, key) => {
+      console.log(`${key}: ${value}`);
+    });
+  
+    this.apiService.createPartyDetails(formData).subscribe((response: any) => {
+      if (response.success) {
+        alert('Party Created Successfully!');
+      }
+    }, (error) => {
+      let caughtErr = error.error
+      for (let key in caughtErr.error) {
+        if (caughtErr.error.hasOwnProperty(key)) {
+            this.errorMsg += `${key}: ${caughtErr.error[key].join(", ")}\n`;
+        }
+    }
+    });
+  }
+  
 }

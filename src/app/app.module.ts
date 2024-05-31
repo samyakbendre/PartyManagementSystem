@@ -13,7 +13,6 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { PartyDetailsFormComponent } from './views/party-details-form/party-details-form.component';
 import { PartyDetailsListComponent } from './views/party-details-list/party-details-list.component';
 import { FormsModule } from '@angular/forms';
-// import { AuthInterceptor } from './helpers/token-interceptor.interceptor';
  
 @NgModule({
   declarations: [

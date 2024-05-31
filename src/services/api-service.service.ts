@@ -16,7 +16,6 @@ export class ApiServiceService {
     const token = this.tokenService.getToken();
     return new HttpHeaders({
       'Authorization': `Token ${token}`,
-      'Content-Type': 'application/json'
     });
   }
 
