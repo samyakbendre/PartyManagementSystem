@@ -30,6 +30,10 @@ const routes: Routes = [
     component : PartyDetailsListComponent,
     canActivate : [AuthGuard]
   },
+  {
+    path : '**',
+    redirectTo : 'login'
+  }
 ];
 
 @NgModule({
